@@ -1,0 +1,42 @@
+[
+    {
+        "schoolName": "학성고등학교",
+        "url": "/view/haksung",
+        "imgUrl": "/images/haksung/1.jpg"
+    },
+    {
+        "schoolName": "신정고등학교",
+        "url": "/view/shinjung",
+        "imgUrl": "/images/shinjung/1.jpg"
+    },
+    {
+        "schoolName": "울산중앙여자고등학교",
+        "url": "/view/joongangGirls",
+        "imgUrl": "/images/joongangGirls/1.jpg"
+    },
+    {
+        "schoolName": "현대고등학교",
+        "url": "/view/hyundai",
+        "imgUrl": "/images/hyundai/1.jpg"
+    },
+    {
+        "schoolName": "울산강남고등학교",
+        "url": "/view/gangnam",
+        "imgUrl": "/images/gangnam/1.jpg"
+    },
+    {
+        "schoolName": "울산중앙고등학교",
+        "url": "/view/joongang",
+        "imgUrl": "/images/joongang/2.jpg"
+    },
+    {
+        "schoolName": "신선여자고등학교",
+        "url": "/view/shinsunGirls",
+        "imgUrl": "/images/shinsunGirls/1.jpg"
+    },
+    {
+        "schoolName": "무거고등학교",
+        "url": "/view/mugeo",
+        "imgUrl": "/images/mugeo/1.jpg"
+    }
+]
