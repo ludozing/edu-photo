@@ -1,5 +1,27 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('../fonts/GmarketSansTTF/GmarketSansTTFMedium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansLight';
+    src: url('../fonts/GmarketSansTTF/GmarketSansTTFLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('../fonts/GmarketSansTTF/GmarketSansTTFBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .mainPage {
-    background-color:  #545C8F;
+    background-color: #CACEE8;
+
     .content {
         max-width: 1920px;
         min-height: 100vh;
@@ -7,25 +29,101 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        .schoolCardsArea {
-            width: 1500px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            row-gap: 20px;
-            // gap: 20px;
-            .schoolCard {
-                width: 360px;
-                height: 320px;
-                background-color: #EEE;
-                .schoolCardImg {
-                    width: 100%;
-                    height: 270px;
-                    object-fit: cover;
+
+        .innerBg {
+            width: 1694px;
+            // max-height: 1036px;
+            height: 940px;
+            background-color: black;
+            background-image: url('../images/mainBg.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 16px 18px;
+            border-radius: 27px;
+
+            .innerLine {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border: 1px solid #EF92B9;
+                width: 100%;
+                height: 100%;
+                border-radius: 27px;
+                position: relative;
+                .titleArea {
+                    margin-top: 35px;
+                    margin-bottom: 48px;
+                    width: 677px;
+                    height: 97px;
+                    border-top: 2px solid #EF92B9;
+                    border-bottom: 2px solid #EF92B9;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+
+                    .title {
+                        font-family: 'GmarketSansBold';
+                        font-weight: 700;
+                        font-size: 48px;
+                        line-height: 97px;
+                        span {
+                            &:first-child {
+                                color: #E092AF;
+                            }
+
+                            color: #7EB9DF;
+                        }
+                    }
                 }
-                p {
-                    line-height: 50px;
-                    font-size: 20px;
+
+                .schoolCardsArea {
+                    // width: 1636px;
+                    padding: 0 92px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    row-gap: 24px;
+
+                    a {
+                        .schoolCard {
+                            width: 300px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            .boxWrap {
+                                width: 300px;
+                                height: 224px;
+                                border-radius: 13px;
+                                overflow: hidden;
+                                .schoolCardImg {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            .nameArea {
+                                height: 76px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                p {
+                                    font-size: 30px;
+                                    font-family: 'GmarketSansLight';
+                                    font-weight: 300;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                .eduLogo {
+                    position: absolute;
+                    width: 240px;
+                    height: 38px;
+                    bottom: 25px;
+                    right: 36px;
                 }
             }
         }

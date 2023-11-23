@@ -12,6 +12,7 @@
         position: relative;
         width: 1920px;
         height: 100%;
+        padding: 0 40px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -70,12 +71,3 @@
         }
     }
 }
-
-@keyframes flowing {
-    from {
-        transform: translate(-25%, -50%);
-    }
-    to {
-        transform: translate(-75%, -50%);
-    }
-};

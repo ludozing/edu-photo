@@ -1,52 +1,121 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('../fonts/GmarketSansTTF/GmarketSansTTFMedium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansLight';
+    src: url('../fonts/GmarketSansTTF/GmarketSansTTFLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('../fonts/GmarketSansTTF/GmarketSansTTFBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .photoViewPage {
-    background-color:  #545C8F;
-    color: #FFF;
-    header {
-        width: 100vw;
-        height: 100px;
-        position: absolute;
-        top: 0;
-        left: 0;
+    background-color:  #CACEE8;
+    .content {
+        max-width: 1920px;
+        min-height: 100vh;
+        margin: 0 auto;
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 90;
-        a {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-        }
-        h1 {
-            font-size: 20px;
-            line-height: 100px;
+        .innerBg {
+            width: 1694px;
+            // max-height: 1036px;
+            height: 940px;
+            background-color: black;
+            background-image: url('../images/mainBg.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 16px 18px;
+            border-radius: 27px;
+    
+            .innerLine {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border: 1px solid #EF92B9;
+                width: 100%;
+                height: 100%;
+                border-radius: 27px;
+                position: relative;
+                .toMain {
+                    position: absolute;
+                    top: 23px;
+                    left: 31px;
+                    >div {
+                        width: 184px;
+                        height: 34px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-content: center;
+                        img {
+                            width: 36px;
+                            height: 34px;
+                            object-fit: contain;
+                        }
+                        p {
+                            font-family: 'GmarketSansBold';
+                            font-size: 33px;
+                            color: #E092AF;
+                            line-height: 1.4;
+                        }
+                    }
+                }
+                .carouselArea {
+                    width: 100%;
+                    height: 720px;
+                    margin-top: 97px;
+                    padding: 0 40px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    .schoolNameArea {
+                        // width: 274px;
+                        height: 68px;
+                        padding: 0 53px;
+                        background-color: #D7EAF5;
+                        border-radius: 34px;
+                        border: 1px solid #333333;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .schoolName {
+                            font-family: 'GmarketSansLight';
+                            font-size: 30px;
+                            // line-height: 68px;
+                        }
+                    }
+                    .item {
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                }
+                .eduLogo {
+                    position: absolute;
+                    width: 240px;
+                    height: 38px;
+                    bottom: 25px;
+                    right: 36px;
+                }
+            }
         }
     }
-    .btns  {
-        position: fixed;
-        top: 50%;
-        width: 100px;
-        height: 100px;
-        transform: translateY(-50%);
-        z-index: 90;
-        font-size: 50px;
-        font-weight: bold;
-        line-height: 100px;
-        background-color: transparent;
-        color: #FFF;
-        outline: none;
-        border: none;
-        opacity: 0.5;
-        &:hover {
-            opacity: 1;
-        }
-        &.prevBtn {
-            left: 0;
-        }
-        &.nextBtn {
-            right: 0;
-        }
-    }
+    
     .popupBg {
         position: fixed;
         top: 0;
