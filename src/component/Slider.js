@@ -1,12 +1,40 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
 import "./Slider.scss";
-import ImagePopup from './ImagePopup';
+import { Carousel } from 'react-responsive-3d-carousel'
 
-function Slider({ data, onStop, onRun, count, onClick, selData }) {
+
+function Slider({ data, onStop, onRun, onClick, animate }) {
     return (
         <div className="wrapper">
-            <div
+            <div className='slide_wrapper'>
+            <Carousel
+                autoPlay={animate}
+                width='600px'
+                height='480px'
+                infiniteLoop={true}
+                arrowsDefaultColor="rgba(255, 255, 255, 0.3)"
+                arrowsHoveredColor='white'
+                depth={2}
+                isShadow={true}
+                showIndicators={false}
+
+            >
+                {
+                    data.map((item, index, array) => {
+                        return (
+                            <div className='item' key={index}
+                                onClick={e => onClick(e, item)}
+                                onMouseOver={onStop}
+                                onMouseOut={onRun}
+                            >
+                                <img src={item.imgUrl} alt={item.fileName} />
+                            </div>
+                        );
+                    })
+                }
+            </Carousel>
+            </div>
+            {/* <div
                 className="slide_wrapper"
             >
                 <div className='item'
@@ -32,7 +60,7 @@ function Slider({ data, onStop, onRun, count, onClick, selData }) {
                 <div className='item'
                     onClick={e => onClick(e, data[count])}
                     onMouseOver={onStop}
-                    onMouseLeave={selData?null:onRun}
+                    onMouseOut={selData.imgUrl?null:onRun}
                 >
                     <img src={data[count].imgUrl} alt={data[count].fileName} />
                 </div>
@@ -56,7 +84,7 @@ function Slider({ data, onStop, onRun, count, onClick, selData }) {
                 >
                     <img src={data[count + 4 > data.length - 1 ? count + 4 - data.length : count + 4].imgUrl} alt={data[count + 4 > data.length - 1 ? count + 4 - data.length : count + 4].fileName} />
                 </div>
-            </div>            
+            </div>             */}
         </div>
     );
 }

@@ -60,44 +60,50 @@ function PhotoView(props) {
     const [selData, setSelData] = useState({});
     const onStop = () => setAnimate(false);
     const onRun = () => setAnimate(true);
-    const onPrev = (e) => {
-        e.preventDefault();
-        console.log(count)
-        if (count === 0) {
-            setCount(dataArr.length - 1);
-        } else {
-            setCount(count => count - 1);
-        };
-    };
-    const onNext = (e) => {
-        e.preventDefault();
-        if (count === dataArr.length - 1) {
-            setCount(0);
-        } else {
-            setCount(count => count + 1);
-        };
-    };
+    // const onPrev = (e) => {
+    //     e.preventDefault();
+    //     console.log(count)
+    //     if (count === 0) {
+    //         setCount(dataArr.length - 1);
+    //     } else {
+    //         setCount(count => count - 1);
+    //     };
+    // };
+    // const onNext = (e) => {
+    //     e.preventDefault();
+    //     if (count === dataArr.length - 1) {
+    //         setCount(0);
+    //     } else {
+    //         setCount(count => count + 1);
+    //     };
+    // };
     const onClick = (e, selData) => {
         e.preventDefault();
         setPopup(true);
         setAnimate(false);
         setSelData(selData);
     };
-    useEffect(() => {
-        let changingItems;
-        if (animate) {
-            changingItems = setInterval(() => {
-                if (count === dataArr.length - 1) {
-                    setCount(0);
-                } else {
-                    setCount(count => count + 1);
-                };
-            }, 2000);
-        } else {
-            clearInterval(changingItems);
-        };
-        return () => clearInterval(changingItems);
-    }, [count, animate])
+    const onClosePopup = (e) => {
+        e.preventDefault();
+        setAnimate(true);
+        setPopup(false);
+        setSelData({});
+    }
+    // useEffect(() => {
+    //     let changingItems;
+    //     if (animate) {
+    //         changingItems = setInterval(() => {
+    //             if (count === dataArr.length - 1) {
+    //                 setCount(0);
+    //             } else {
+    //                 setCount(count => count + 1);
+    //             };
+    //         }, 3000);
+    //     } else {
+    //         clearInterval(changingItems);
+    //     };
+    //     return () => clearInterval(changingItems);
+    // }, [count, animate])
 
     return (
         <div className='photoViewPage'>
@@ -105,8 +111,8 @@ function PhotoView(props) {
                 <a href='/'>←메인으로</a>
                 <h1>{schoolName}</h1>
             </header>
-            <Slider data={dataArr} onStop={onStop} onRun={onRun} count={count} onClick={onClick} selData={selData} />
-            <button
+            <Slider data={dataArr} onStop={onStop} onRun={onRun} onClick={onClick} animate={animate} />
+            {/* <button
                 className='btns prevBtn'
                 onClick={onPrev}
                 onMouseOver={onStop}
@@ -121,16 +127,11 @@ function PhotoView(props) {
                 onMouseOut={onRun}
             >
                 <BsFillCaretRightFill />
-            </button>
+            </button> */}
             <ImagePopup
                 pop={popup}
                 selData={selData}
-                onClose={(e) => {
-                    e.preventDefault();
-                    setAnimate(true);
-                    setPopup(false);
-                    setSelData({});
-                }}
+                onClose={onClosePopup}
             />
         </div>
     );
