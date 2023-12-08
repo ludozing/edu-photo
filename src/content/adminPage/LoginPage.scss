@@ -1,0 +1,68 @@
+.loginPage {
+    h2 {
+        margin-top: 104px;
+        margin-bottom: 31px;
+        font-family: 'GmarketSansBold';
+        font-size: 35px;
+        color: #4D4D4D;
+    }
+    >p {
+        margin-bottom: 68px;
+        font-family: 'GmarketSansLight';
+        font-size: 24px;
+        color: #4D4D4D;
+    }
+    form {
+        height: 241px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .inputArea {
+            height: 126px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;    
+            div {
+                width: 570px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                label {
+                    font-family: 'GmarketSansMedium';
+                    font-size: 24px;
+                    color: #4D4D4D;
+                    width: 93px;
+                    &.adminIdLabel {
+                        letter-spacing: 7.9px;
+                    }
+                }
+                input {
+                    width: 442px;
+                    height: 48px;
+                    line-height: 48px;
+                    font-size: 24px;
+                    color: #4D4D4D;
+                    padding: 0 20px;
+                    border: none;
+                    outline: none;
+                    background-color: #FFF;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 4px rgba($color: #000000, $alpha: 0.25);
+                }
+            }
+        }
+        .loginBtn {
+            width: 564px;
+            height: 48px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background: linear-gradient(to right, #E092AF, #C76385);
+            font-family: 'GmarketSansMedium';
+            font-size: 26px;
+            color: #FFF;
+        }
+    }
+}

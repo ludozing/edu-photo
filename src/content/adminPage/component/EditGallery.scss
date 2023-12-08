@@ -1,0 +1,261 @@
+.editGallery {
+    h2.schoolName {
+        margin-bottom: 40px;
+        font-family: 'GmarketSansBold';
+        font-weight: 700;
+        font-size: 35px;
+        color: #4D4D4D;
+    }
+
+    form.editGalForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        div.imgListWrap {
+            width: 1658px;
+            height: 500px;
+            overflow-y: scroll;
+
+            ul.imgList {
+                width: 1054px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: calc(158px /3);
+                row-gap: 25px;
+
+                li {
+                    div.imgFrame {
+
+                        width: 224px;
+                        height: 150px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 3px solid #E092AF;
+                        border-radius: 17px;
+                        overflow: hidden;
+
+                        &.selected {
+                            background-color: #7EB9DF;
+                        }
+
+                        div.imgWrap {
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+
+                            button.thumbnailBtn {
+                                position: absolute;
+                                top: 7px;
+                                left: 10px;
+                                z-index: 3;
+                                width: 64px;
+                                height: 28px;
+                                border-radius: 4px;
+
+                                &.visible {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    color: #FFF;
+
+                                    // background-position: center;
+                                    // background-repeat: no-repeat;
+                                    // background-size: contain;
+                                    // background-color: transparent;
+                                    &.on {
+                                        background-color: #E092AF;
+                                        border: none;
+
+                                        // background-image: url(../../../images/thumbnailBtn_on.png);
+                                        img {
+                                            display: none;
+                                        }
+
+                                    }
+
+                                    &.off {
+                                        background-color: rgba($color: #000000, $alpha: 0.24);
+                                        border: 1px solid #E092AF;
+                                        color: #FFF;
+
+                                        img {
+                                            display: block;
+                                        }
+
+                                        // background-image: url(../../../images/thumbnailBtn_off.png);
+                                    }
+
+                                    img {
+                                        width: 13px;
+                                        height: 10px;
+                                        margin-right: 4px;
+                                    }
+                                }
+
+                                &.invisible {
+                                    display: none;
+                                }
+                            }
+
+                            div.selBox {
+                                &.visible {
+                                    display: flex;
+                                }
+
+                                &.invisible {
+                                    display: none;
+                                }
+
+                                justify-content: flex-end;
+                                align-items: end;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                z-index: 1;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba($color: #000000, $alpha: 0.54);
+                                padding: 10px 15px;
+
+                                div.btnsArea {
+                                    width: 108px;
+                                    height: 30px;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+
+                                    button {
+                                        width: 30px;
+                                        height: 30px;
+                                        outline: none;
+                                        border: 1px solid #E092AF;
+                                        background-color: rgba($color: #000000, $alpha: 0.24);
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+
+                                        &.prevBtn img {
+                                            width: 7px;
+                                            height: 12px;
+                                        }
+
+                                        &.nextBtn img {
+                                            width: 7px;
+                                            height: 12px;
+                                        }
+
+                                        &.delBtn img {
+                                            width: 16px;
+                                            height: 20px;
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            div.deleting {
+                                &.visible {
+                                    display: flex;
+                                }
+
+                                &.invisible {
+                                    display: none;
+                                }
+
+                                justify-content: center;
+                                align-items: center;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                z-index: 2;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba($color: #000000, $alpha: 0.54);
+
+                                p {
+                                    font-family: 'GmarketSansMedium';
+                                    font-size: 25px;
+                                    color: #FFF;
+                                    pointer-events: none;
+                                }
+
+                                button {
+                                    background-color: transparent;
+                                    width: 28px;
+                                    height: 28px;
+                                    border-radius: 14px;
+                                    margin-left: 5px;
+                                    cursor: pointer;
+
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: contain;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &.newImage {
+                        input[type="file"] {
+                            display: none;
+                        }
+
+                        div.imgFrame {
+                            border: none;
+
+                            div.imgWrap {
+                                // width: 218px;
+                                // height: 144px;
+                                background-color: #E092AF;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                img {
+                                    width: 37px;
+                                    height: 35px;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        div.btnsArea {
+            width: 340px;
+            margin-top: 35px;
+            display: flex;
+            justify-content: space-between;
+
+            button,
+            input[type="submit"] {
+                width: 156px;
+                height: 44px;
+                font-family: 'GmarketSansMedium';
+                background-color: #7EB9DF;
+                color: #FFF;
+                font-size: 24px;
+                border-radius: 8px;
+
+                &:disabled {
+                    background-color: #999;
+                    color: #E6E6E6;
+                }
+            }
+        }
+    }
+}

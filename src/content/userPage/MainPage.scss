@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('../../fonts/GmarketSansTTF/GmarketSansTTFMedium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansLight';
+    src: url('../../fonts/GmarketSansTTF/GmarketSansTTFLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('../../fonts/GmarketSansTTF/GmarketSansTTFBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mainPage {
+
+    .content {
+        .innerBg {
+            .innerLine {
+                .loginBtn {
+                    position: absolute;
+                    top: 20px;
+                    right: 40px;
+                    width: 100px;
+                    height: 28px;
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
+                    // font-family: 'GmarketSansLight';
+                    // font-size: 20px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+
+                .titleArea {
+                    margin-top: 35px;
+                    margin-bottom: 48px;
+                    width: 677px;
+                    height: 97px;
+                    border-top: 2px solid #EF92B9;
+                    border-bottom: 2px solid #EF92B9;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+
+                    .title {
+                        font-family: 'GmarketSansBold';
+                        font-weight: 700;
+                        font-size: 48px;
+                        line-height: 97px;
+
+                        span {
+                            &:first-child {
+                                color: #E092AF;
+                            }
+
+                            color: #7EB9DF;
+                        }
+                    }
+                }
+
+                .schoolCardsArea {
+                    // width: 1636px;
+                    height: 624px;
+                    padding: 0 92px;
+                    overflow-y: scroll;
+                    .schoolCardsWrap {
+                        width: 1486px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        gap: calc(286px / 3);
+                        row-gap: 24px;
+                        a {
+                            .schoolCard {
+                                width: 300px;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+
+                                .boxWrap {
+                                    width: 300px;
+                                    height: 224px;
+                                    border-radius: 13px;
+                                    overflow: hidden;
+
+                                    .schoolCardImg {
+                                        width: 100%;
+                                        height: 100%;
+
+                                        &:not(.noImg) {
+                                            object-fit: cover;
+                                        }
+
+                                        &.noImg {
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            background-color: #CCCCCC;
+
+                                            img {
+                                                width: 120px;
+                                                height: 102px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .nameArea {
+                                    height: 76px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    p {
+                                        font-size: 30px;
+                                        font-family: 'GmarketSansLight';
+                                        font-weight: 300;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                .eduLogo {
+                    position: absolute;
+                    width: 240px;
+                    height: 38px;
+                    bottom: 25px;
+                    right: 36px;
+                }
+            }
+        }
+    }
+}

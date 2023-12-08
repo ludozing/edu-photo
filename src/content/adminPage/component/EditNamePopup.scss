@@ -1,0 +1,55 @@
+.modalContentArea {
+    // width: 470px;   
+    // height: 282px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h3 {
+        font-family: 'GmarketSansMedium';
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+    p {
+        font-family: 'GmarketSansLight';
+        font-size: 21px;
+        color: #4D4D4D;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    input[type='text'] {
+        border-radius: 6px;
+        border: none;
+        outline: none;
+        width: 342px;
+        height: 37px;
+        line-height: 37px;
+        font-family: 'GmarketSansLight';
+        font-size: 21px;
+        background-color: #F2F2F2;
+    }
+    div.btnsArea {
+        margin-top: 38px;
+        width: 340px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            width: 156px;
+            height: 44px;
+            color: #FFF;
+            &.submit {
+                background-color: #E092AF;
+                &:disabled {
+                    background-color: #999;
+                    color: #E6E6E6;
+                }
+            }
+            &.cancel {
+                background-color: #E2C5D0;
+            }
+        }
+    }
+}
