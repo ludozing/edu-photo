@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRefresh } from './reducer/authentication';
 import { cleanup } from '@testing-library/react';
+import { withCookies } from 'react-cookie';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default withCookies(App);
