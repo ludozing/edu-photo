@@ -53,6 +53,6 @@ const onLoginSuccess = (accessToken) => {
     // accessToken 설정
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     // accessToken 만료되기 1분 전에 로그인 연장 시도
-    // setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
-    setTimeout(onSilentRefresh, 1000);
+    setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
+    // setTimeout(onSilentRefresh, 1000);
 }
