@@ -3,9 +3,20 @@ import { Route, Routes } from 'react-router';
 import MainPage from './content/userPage/MainPage';
 import PhotoView from './content/userPage/PhotoView';
 import AdminPage from './content/adminPage';
-import LoginPage from './content/adminPage/LoginPage';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRefresh } from './reducer/authentication';
+import { cleanup } from '@testing-library/react';
 
 function App() {
+  const dispatch = useDispatch();
+  const refTok = useSelector((state)=>state.session.refTok);
+  useEffect(()=> {
+      if(refTok) {
+          dispatch(setRefresh())
+      } else return cleanup;
+  },[]);
+
   return (
     <div className="App">
       <Routes>

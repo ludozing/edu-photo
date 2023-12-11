@@ -3,13 +3,18 @@ import React, { useState } from 'react';
 import { API_URL } from '../../config/constants';
 import { useNavigate } from 'react-router';
 import './LoginPage.scss';
+import { setLogin } from '../../reducer/authentication';
+import { useDispatch } from 'react-redux';
 
-function LoginPage({ setLoginState }) {
+function LoginPage(props) {
     const navigate = useNavigate();
     const [adminData, setAdminData] = useState({
         adminId: '',
         adminPw: ''
     });
+    const dispatch = useDispatch();
+    const onLogin = (data) => dispatch(setLogin(data));
+
     const onChange = e => {
         e.preventDefault();
         setAdminData({
@@ -22,10 +27,10 @@ function LoginPage({ setLoginState }) {
         axios.post(`${API_URL}/adminLogin`, adminData)
             .then(res => {
                 if (res.data.success) {
-                    setLoginState(true);
+                    onLogin(res.data);
                     navigate('/admin');
                 } else {
-                    window.alert('로그인 실패')
+                    window.alert('계정 정보를 확인해주세요.')
                 }
             })
             .catch(err => console.error(err))

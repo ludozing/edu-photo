@@ -22,11 +22,11 @@ function EditGalleryForm({ originData, schoolId }) {
     useEffect(() => {
         const copyArr = JSON.parse(JSON.stringify(originData));
         setDataArr([...copyArr])
-    }, []);
+    }, [originData]);
     useEffect(() => {
         // 데이터 변화 체크
         setIsChanged(JSON.stringify(originData) !== JSON.stringify(dataArr) || deleteArr.length > 0);
-    }, [dataArr, deleteArr]);
+    }, [dataArr, deleteArr,originData]);
 
     const onSelPic = (e, index) => {
         e.preventDefault();

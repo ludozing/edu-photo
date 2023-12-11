@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import useAsync from '../../../hooks/useAsync';
 import axios from 'axios';
 import { API_URL } from '../../../config/constants';
 import { useNavigate } from 'react-router';
@@ -17,17 +16,18 @@ function EditSchool({ schoolData }) {
     const [openEditName, setOpenEditName] = useState(false);
     const [deleteArr, setDeleteArr] = useState([]);
     const [nsName, setNsName] = useState('');
+    const [orderChanged, setOrderChanged] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         const copyArr = JSON.parse(JSON.stringify(schoolData));
         setDataArr([...copyArr]);
-    }, []);
+    }, [schoolData]);
     useEffect(() => {
         // 데이터 변화 체크
         const status = JSON.stringify(schoolData) !== JSON.stringify(dataArr);
         const status2 = deleteArr.length > 0
         setIsChanged(status || status2);
-    }, [dataArr, deleteArr])
+    }, [dataArr, deleteArr, schoolData])
 
     const onClick = (e, index) => {
         e.preventDefault();
@@ -197,7 +197,7 @@ function EditSchool({ schoolData }) {
             }
         };
         axios.post(`${API_URL}/editSchoolList`, { editedData: editedDataArr, deletedData: deleteArr }).then((res) => {
-            navigate(`/`)
+            navigate(0);
         }).catch(err => console.error(err));
     };
 

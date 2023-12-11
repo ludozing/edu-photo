@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import './PhotoView.scss';
 import ImagePopup from './component/ImagePopup';
@@ -18,36 +18,6 @@ function PhotoView(props) {
         return response.data;
     }
 
-    let schoolName;
-    let dataArr;
-    switch (id) {
-        case 'gangnam':
-            schoolName = "울산강남고등학교";
-            break;
-        case 'haksung':
-            schoolName = "학성고등학교";
-            break;
-        case 'hyundai':
-            schoolName = "현대고등학교";
-            break;
-        case 'joongang':
-            schoolName = "울산중앙고등학교";
-            break;
-        case 'joongangGirls':
-            schoolName = "울산중앙여자고등학교";
-            break;
-        case 'mugeo':
-            schoolName = "무거고등학교";
-            break;
-        case 'shinjung':
-            schoolName = "신정고등학교";
-            break;
-        case 'shinsunGirls':
-            schoolName = "신선여자고등학교";
-            break;
-        default:
-            schoolName = "신정고등학교";
-    };
     const [animate, setAnimate] = useState(true);
     const [popup, setPopup] = useState(false);
     const [selData, setSelData] = useState({});

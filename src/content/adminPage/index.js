@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes, useParams } from 'react-router';
+import React from 'react';
+import { Route, Routes } from 'react-router';
 import { Link } from 'react-router-dom';
 import EditSchool from './component/EditSchool';
 import EditGallery from './component/EditGallery';
@@ -9,14 +9,14 @@ import axios from 'axios';
 import useAsync from '../../hooks/useAsync';
 import { API_URL } from '../../config/constants';
 import LoginPage from './LoginPage';
+import { useSelector } from 'react-redux';
 
 function AdminPage(props) {
-    const [loginState, setLoginState] = useState(false);
     async function getThumbnailList() {
         const response = await axios.get(`${API_URL}/getThumbnails`)
         return response.data;
     }
-
+    const loginState = useSelector(state => state.session.login);
     const state = useAsync(getThumbnailList);
     const { loading, error, data: result } = state;
     if (loading) return <div className='content appCon'>로딩중...</div>
@@ -30,11 +30,11 @@ function AdminPage(props) {
             <div className='content'>
                 <div className='innerBg'>
                     <div className='innerLine'>
-                        <a className='toMain' href='/'>
+                        <Link className='toMain' to='/'>
                             <div>
                                 <img src={toMainIcon} alt={'메인으로'} /> <p>메인으로</p>
                             </div>
-                        </a>
+                        </Link>
                         <div className='titleArea'>
                             <h1 className='title'>
                                 <span>고교학점제</span>
@@ -47,7 +47,7 @@ function AdminPage(props) {
                                     <Route path='/' element={<EditSchool schoolData={result} />} />
                                     <Route path='/:id' element={<EditGallery />} />
                                 </Routes>
-                                : <LoginPage setLoginState={setLoginState} />
+                                : <LoginPage />
 
                         }
                     </div>

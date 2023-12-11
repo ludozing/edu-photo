@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router';
 import EditGalleryForm from './EditGalleryForm';
 import { API_URL } from '../../../config/constants';
