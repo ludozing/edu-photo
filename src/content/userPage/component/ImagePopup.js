@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiOutlineClose } from "react-icons/ai";
+import { STORAGE_URL } from '../../../config/constants';
 
 function ImagePopup({pop, selData, onClose}) {
     return (
@@ -7,7 +8,7 @@ function ImagePopup({pop, selData, onClose}) {
             <div className='popup' onClick={e => {e.stopPropagation();}}>
                 <button onClick={onClose}><AiOutlineClose /></button>
                 <div className='imgArea'>
-                    <img src={selData.imgUrl} alt={selData.fileName} />
+                    <img src={`${STORAGE_URL}/${selData.imgUrl}`} alt={selData.fileName} />
                 </div>
             </div>
         </div>
