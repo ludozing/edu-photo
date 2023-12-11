@@ -20,7 +20,8 @@ function EditGalleryForm({ originData, schoolId }) {
     const fileInput = useRef();
 
     useEffect(() => {
-        setDataArr([...originData])
+        const copyArr = JSON.parse(JSON.stringify(originData));
+        setDataArr([...copyArr])
     }, []);
     useEffect(() => {
         // 데이터 변화 체크
@@ -102,10 +103,8 @@ function EditGalleryForm({ originData, schoolId }) {
         fileInput.current.click();
     }
     const onChangefileInput = (e) => {
-        console.log('확인')
         const fileList = e.target.files;
         const oldFile = fileList[0];
-        const length = fileList?.length;
         const fileExtension = e.target.files[0].name.split('.')[1]
         console.log(fileList);
         const timeStamp = + new Date();

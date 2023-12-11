@@ -95,6 +95,9 @@
                             font-size: 24px;
                             color: #4D4D4D;
                             padding: 0 44px;
+                            .schoolName.deleted {
+                                color: #B7B7B7;
+                            }
 
                             &.selected {
                                 background-color: rgba($color: #E092AF, $alpha: 0.22);

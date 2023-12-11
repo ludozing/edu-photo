@@ -19,13 +19,13 @@ function EditSchool({ schoolData }) {
     const [nsName, setNsName] = useState('');
     const navigate = useNavigate();
     useEffect(() => {
-        setDataArr([...schoolData]);
+        const copyArr = JSON.parse(JSON.stringify(schoolData));
+        setDataArr([...copyArr]);
     }, []);
     useEffect(() => {
         // 데이터 변화 체크
         const status = JSON.stringify(schoolData) !== JSON.stringify(dataArr);
         const status2 = deleteArr.length > 0
-        console.log('3. ' + status || status2)
         setIsChanged(status || status2);
     }, [dataArr, deleteArr])
 
@@ -39,7 +39,7 @@ function EditSchool({ schoolData }) {
     };
     const onEditName = (e, changedName) => {
         e.preventDefault();
-        if(changedName==='') {
+        if (changedName === '') {
             window.alert('입력된 이름이 없습니다.')
             return;
         } else {
@@ -86,7 +86,8 @@ function EditSchool({ schoolData }) {
         // 선택한 데이터의 인덱스를 선택한 데이터의 인덱스 - 1로 수정
         copiedDataArr[selIdx].orderIdx = selIdx - 1;
         // 새로운 인덱스를 바탕으로 배열 소팅하여 새롭게 상태관리
-        setDataArr(copiedDataArr.sort((a, b) => a.orderIdx - b.orderIdx));
+        copiedDataArr.sort((a, b) => a.orderIdx - b.orderIdx)
+        setDataArr([...copiedDataArr]);
         // 데이터 선택 커서를 앞으로 이동
         setSelIdx(selIdx - 1);
     };
@@ -108,7 +109,6 @@ function EditSchool({ schoolData }) {
         // 데이터 선택 커서를 뒤로 이동
         setSelIdx(selIdx + 1);
     };
-
     const onDeleteData = (e, dataId) => {
         e.preventDefault();
         if (dataId.length === 0) {
@@ -212,8 +212,7 @@ function EditSchool({ schoolData }) {
                                 dataArr.map((item, index, array) => {
                                     return (
                                         <li key={index} onClick={e => onClick(e, index)} className={selIdx === index ? 'schoolBtn selected' : 'schoolBtn'}>
-                                            <p>{item.schoolName}</p>
-                                            <p>{deleteArr.filter(data => data === item._id).length === 0 ? '' : '삭제'}</p>
+                                            <p className={deleteArr.filter(data => data === item._id).length === 0 ?'schoolName':'schoolName deleted'}>{item.schoolName}</p>
                                         </li>
                                     )
                                 })
@@ -223,7 +222,7 @@ function EditSchool({ schoolData }) {
                                 <input type='text' onChange={onTypeNS} value={nsName} placeholder='신규로 추가할 학교를 입력해주세요.' />
                                 <button className='addNew' onClick={onCreateData}></button>
                             </div>
-                            <button className={nsName===''?'cancelNew invisible':'cancelNew visible'} onClick={onCancelCreatingData}></button>
+                            <button className={nsName === '' ? 'cancelNew invisible' : 'cancelNew visible'} onClick={onCancelCreatingData}></button>
                         </li>
                     </ul>
                 </div>
@@ -234,10 +233,10 @@ function EditSchool({ schoolData }) {
                 <div className='btnsArea side'>
                     <button className='goUp' onClick={onMoveUp} disabled={selIdx === -1 || selIdx === 0}>
                         <img src={upIcon} alt='위' />
-                        </button>
+                    </button>
                     <button className='goDown' onClick={onMoveDown} disabled={selIdx === -1 || selIdx === dataArr.length - 1}>
                         <img src={downIcon} alt='아래' />
-                        </button>
+                    </button>
                     <button className='editName' disabled={selIdx === -1} onClick={onOpenModal}>
                         <img src={editNameIcon} alt='수정' />
                     </button>
