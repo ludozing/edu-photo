@@ -24,7 +24,7 @@ Modal.setAppElement('#root');
 function EditNamePopup({ isOpen, selectedData, onClose, onEditName }) {
     const [nameValue, setNameValue] = useState('');
     useEffect(() => {
-        setNameValue('');
+        setNameValue(selectedData?selectedData.schoolName:'');
     }, [isOpen]);
 
     const onChangeInput = e => {
@@ -41,7 +41,7 @@ function EditNamePopup({ isOpen, selectedData, onClose, onEditName }) {
         >
             <div className='modalContentArea'>
                 <h3>학교 이름 수정</h3>
-                <p>학교이름을 수정합니다.<br />{`현재 학교 이름 : ${selectedData?selectedData.schoolName:''}`}</p>
+                <p>학교이름을 수정합니다.</p>
                 <input type='text' defaultValue={nameValue} onChange={onChangeInput} />
                 <div className='btnsArea'>
                     <button className='submit' onClick={e => onEditName(e, nameValue)}>적용</button>

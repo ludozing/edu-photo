@@ -15,6 +15,7 @@ function EditGalleryForm({ originData, schoolId }) {
     const [isChanged, setIsChanged] = useState(false);
     const [deleteArr, setDeleteArr] = useState([]);
     const [imageFileArr, setImageFileArr] = useState([]);
+    const [orderChanged, setOrderChanged] = useState([]);
 
     const navigate = useNavigate();
     const fileInput = useRef();
@@ -26,7 +27,7 @@ function EditGalleryForm({ originData, schoolId }) {
     useEffect(() => {
         // 데이터 변화 체크
         setIsChanged(JSON.stringify(originData) !== JSON.stringify(dataArr) || deleteArr.length > 0);
-    }, [dataArr, deleteArr,originData]);
+    }, [dataArr, deleteArr, originData]);
 
     const onSelPic = (e, index) => {
         e.preventDefault();
@@ -64,6 +65,10 @@ function EditGalleryForm({ originData, schoolId }) {
         // 새로운 인덱스를 바탕으로 배열 소팅하여 새롭게 상태관리
         setDataArr(copiedDataArr.sort((a, b) => a.orderIdx - b.orderIdx));
         // 데이터 선택 커서를 앞으로 이동
+        const selectedData = dataArr[selIdx];
+        const ocArr = [...orderChanged, selectedData._id];
+        const set = new Set(ocArr);
+        setOrderChanged([...set]);
         setSelIdx(selIdx - 1);
     };
 
@@ -83,6 +88,10 @@ function EditGalleryForm({ originData, schoolId }) {
         // 새로운 인덱스를 바탕으로 배열 소팅하여 새롭게 상태관리
         setDataArr(copiedDataArr.sort((a, b) => a.orderIdx - b.orderIdx));
         // 데이터 선택 커서를 뒤로 이동
+        const selectedData = dataArr[selIdx];
+        const ocArr = [...orderChanged, selectedData._id];
+        const set = new Set(ocArr);
+        setOrderChanged([...set]);
         setSelIdx(selIdx + 1);
     };
 
@@ -169,7 +178,7 @@ function EditGalleryForm({ originData, schoolId }) {
         }
         await axios.post(`${API_URL}/uploadImg`, formData, {
             header: { 'Content-Type': 'multipart/form-data' }
-        }).then((res)=> {
+        }).then((res) => {
             console.log('다음 작업 진행')
             let editedDataArr = [];
             for (let i = 0; i < dataArr.length; i++) {
@@ -184,15 +193,15 @@ function EditGalleryForm({ originData, schoolId }) {
                     editedDataArr.push(dataArr[i]);
                 }
             };
-            
+
             axios.post(`${API_URL}/editGallery`, {
                 editedData: editedDataArr,
                 deletedData: deleteArr,
             })
-            .then(res => {
-                navigate('/admin');
-            })
-            .catch(err => console.error(err));
+                .then(res => {
+                    navigate('/admin');
+                })
+                .catch(err => console.error(err));
         }).catch(error => console.error(error));
     };
 
@@ -205,43 +214,45 @@ function EditGalleryForm({ originData, schoolId }) {
             <div className='imgListWrap'>
                 <ul className='imgList'>
                     {
-                        dataArr.length === 0 ? null:
-                        dataArr.map((item, index, array) => {
-                            return (<li key={index} onClick={e => onSelPic(e, index)}>
-                                <div className={selIdx === index ? 'imgFrame selected' : 'imgFrame'}>
-                                    <div className='imgWrap'>
+                        dataArr.length === 0 ? null :
+                            dataArr.map((item, index, array) => {
+                                return (<li key={index} onClick={e => onSelPic(e, index)}>
+                                    <div className={`imgFrame ${selIdx === index ? 'selected' : ''} ${orderChanged.filter(fi => fi === item._id).length > 0 ? 'oc' : ''}`}>
+                                        <div className='imgWrap'>
 
-                                        <img src={item._id!==''?`${STORAGE_URL}/${item.imgUrl}`:item.imgUrl} alt={item.imgAlt} />
-                                        <button className={
-                                            item.isThumbnail
-                                                ? 'thumbnailBtn visible on'
-                                                : selIdx === index
-                                                    ? 'thumbnailBtn visible off'
-                                                    : 'thumbnailBtn invisible off'
-                                        } onClick={onSelThumbnail}><img src={chkIcon} alt='선택되지 않음' /><span>대표</span></button>
-                                        <div className={selIdx === index && deleteArr.filter(data => data === item._id).length === 0 ? 'selBox visible' : 'selBox invisible'}>
-                                            <div className='btnsArea'>
-                                                <button className='prevBtn' onClick={onMoveUp} disabled={selIdx === 0}>
-                                                    <img src={prevIcon} alt='이전으로' />
-                                                </button>
-                                                <button className='nextBtn' onClick={onMoveDown} disabled={selIdx === dataArr.length - 1}>
-                                                    <img src={nextIcon} alt='다음으로' />
-                                                </button>
-                                                <button className='delBtn' onClick={e => onDelete(e, dataArr[selIdx]._id)}>
-                                                    <img src={deleteIcon} alt='삭제' />
+                                            <img src={item._id !== '' ? `${STORAGE_URL}/${item.imgUrl}` : item.imgUrl} alt={item.imgAlt} />
+                                            <button className={
+                                                item.isThumbnail
+                                                    ? 'thumbnailBtn visible on'
+                                                    : selIdx === index
+                                                        ? 'thumbnailBtn visible off'
+                                                        : originData.filter(fi => fi._id === item._id)[0].isThumbnail
+                                                            ? 'thumbnailBtn visible on original'
+                                                            : 'thumbnailBtn invisible off'
+                                            } onClick={onSelThumbnail}><img src={chkIcon} alt='선택되지 않음' /><span>대표</span></button>
+                                            <div className={selIdx === index && deleteArr.filter(data => data === item._id).length === 0 ? 'selBox visible' : 'selBox invisible'}>
+                                                <div className='btnsArea'>
+                                                    <button className='prevBtn' onClick={onMoveUp} disabled={selIdx === 0}>
+                                                        <img src={prevIcon} alt='이전으로' />
+                                                    </button>
+                                                    <button className='nextBtn' onClick={onMoveDown} disabled={selIdx === dataArr.length - 1}>
+                                                        <img src={nextIcon} alt='다음으로' />
+                                                    </button>
+                                                    <button className='delBtn' onClick={e => onDelete(e, dataArr[selIdx]._id)}>
+                                                        <img src={deleteIcon} alt='삭제' />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className={deleteArr.filter(data => data === item._id).length !== 0 ? 'deleting visible' : 'deleting invisible'}>
+                                                <p>삭제대기</p>
+                                                <button onClick={e => onDelete(e, item._id)}>
+                                                    <img src={cancelDelBtn} alt={'삭제 취소'} />
                                                 </button>
                                             </div>
                                         </div>
-                                        <div className={deleteArr.filter(data => data === item._id).length !== 0 ? 'deleting visible' : 'deleting invisible'}>
-                                            <p>삭제대기</p>
-                                            <button onClick={e => onDelete(e, item._id)}>
-                                                <img src={cancelDelBtn} alt={'삭제 취소'} />
-                                            </button>
-                                        </div>
                                     </div>
-                                </div>
-                            </li>);
-                        })
+                                </li>);
+                            })
                     }
                     <li className='newImage' onClick={onUploadFile}>
                         <input type='file' accept='image/jpg, image/jpeg, image/png' ref={fileInput} onChange={onChangefileInput} />

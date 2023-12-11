@@ -38,8 +38,11 @@
                         border-radius: 17px;
                         overflow: hidden;
 
+                        &.oc {
+                            border: 3px solid #E15B8D;
+                        }
                         &.selected {
-                            background-color: #7EB9DF;
+                            border: 3px solid #7EB9DF;
                         }
 
                         div.imgWrap {
@@ -75,7 +78,11 @@
                                     &.on {
                                         background-color: #E092AF;
                                         border: none;
-
+                                        &.original {
+                                            background-color: #000000;
+                                            color: #b7b7b7;
+                                            cursor: default;
+                                        }
                                         // background-image: url(../../../images/thumbnailBtn_on.png);
                                         img {
                                             display: none;

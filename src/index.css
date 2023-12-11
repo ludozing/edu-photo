@@ -9,6 +9,9 @@ button, input[type="submit"] {
   outline: none;
   border: none;
 }
+.react-tooltip {
+  z-index: 99;
+}
 button img {
   pointer-events: none;
 }

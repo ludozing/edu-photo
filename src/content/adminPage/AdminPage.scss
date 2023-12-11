@@ -95,6 +95,12 @@
                             font-size: 24px;
                             color: #4D4D4D;
                             padding: 0 44px;
+                            .schoolName.nameChanged {
+                                font-family: 'GmarketSansMedium';                                
+                            }
+                            .schoolName.orderChanged {
+                                color: #E15B8D;
+                            }
                             .schoolName.deleted {
                                 color: #B7B7B7;
                             }

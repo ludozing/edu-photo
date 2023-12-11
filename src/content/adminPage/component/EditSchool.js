@@ -8,6 +8,7 @@ import toGallIcon from '../../../images/toGallIcon.png';
 import editNameIcon from '../../../images/editNameIcon.png';
 import downIcon from '../../../images/downIcon.png';
 import upIcon from '../../../images/upIcon.png';
+import { Tooltip } from 'react-tooltip';
 
 function EditSchool({ schoolData }) {
     const [dataArr, setDataArr] = useState([]);
@@ -17,6 +18,7 @@ function EditSchool({ schoolData }) {
     const [deleteArr, setDeleteArr] = useState([]);
     const [nsName, setNsName] = useState('');
     const [orderChanged, setOrderChanged] = useState([]);
+    const [nameChanged, setNameChanged] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         const copyArr = JSON.parse(JSON.stringify(schoolData));
@@ -50,6 +52,11 @@ function EditSchool({ schoolData }) {
             // 새로운 인덱스를 바탕으로 배열 소팅하여 새롭게 상태관리
             setDataArr(copiedDataArr.sort((a, b) => a.orderIdx - b.orderIdx));
             setOpenEditName(false);
+            const selectedData = dataArr[selIdx];
+            const ncArr = [...nameChanged, selectedData._id];
+            const set = new Set(ncArr);
+            setNameChanged([...set]);
+
         }
     };
 
@@ -79,6 +86,7 @@ function EditSchool({ schoolData }) {
         e.preventDefault();
         // 인덱스가 0인 경우 아무 일도 일어나지 않음
         if (selIdx <= 0) return false;
+        const selectedData = dataArr[selIdx];
         // 현재 상태관리 중인 데이터 복사해서 변수에 담음
         let copiedDataArr = [...dataArr];
         // 선택한 데이터의 인덱스 - 1인 데이터를 선택한 데이터의 인덱스로 수정
@@ -90,12 +98,16 @@ function EditSchool({ schoolData }) {
         setDataArr([...copiedDataArr]);
         // 데이터 선택 커서를 앞으로 이동
         setSelIdx(selIdx - 1);
+        const ocArr = [...orderChanged, selectedData._id];
+        const set = new Set(ocArr);
+        setOrderChanged([...set]);
     };
-
+    console.log(orderChanged)
     // 선택한 학교의 순서를 후순위로 이동
     const onMoveDown = (e) => {
         e.preventDefault();
         const lastIdx = dataArr.length - 1;
+        const selectedData = dataArr[selIdx];
         // 인덱스가 마지막인 경우 아무 일도 일어나지 않음
         if (selIdx === lastIdx) return false;
         // 현재 상태관리 중인 데이터 복사해서 변수에 담음
@@ -108,6 +120,9 @@ function EditSchool({ schoolData }) {
         setDataArr(copiedDataArr.sort((a, b) => a.orderIdx - b.orderIdx));
         // 데이터 선택 커서를 뒤로 이동
         setSelIdx(selIdx + 1);
+        const ocArr = [...orderChanged, selectedData._id];
+        const set = new Set(ocArr);
+        setOrderChanged([...set]);
     };
     const onDeleteData = (e, dataId) => {
         e.preventDefault();
@@ -203,6 +218,7 @@ function EditSchool({ schoolData }) {
 
     return (
         <div className='editSchool'>
+            <Tooltip id='tooltip' opacity={0.7} />
             <h2 className='title'>학교 리스트 수정</h2>
             <form onSubmit={onSubmit}>
                 <div className='schoolListArea'>
@@ -210,9 +226,13 @@ function EditSchool({ schoolData }) {
                         {
                             dataArr.length === 0 ? null :
                                 dataArr.map((item, index, array) => {
+                                    const oc = orderChanged.filter(fi => fi === item._id).length > 0;
+                                    const nc = nameChanged.filter(fi => fi === item._id).length > 0;
+                                    const del = deleteArr.filter(fi => fi === item._id).length > 0;
                                     return (
                                         <li key={index} onClick={e => onClick(e, index)} className={selIdx === index ? 'schoolBtn selected' : 'schoolBtn'}>
-                                            <p className={deleteArr.filter(data => data === item._id).length === 0 ?'schoolName':'schoolName deleted'}>{item.schoolName}</p>
+                                            {/* <p className={deleteArr.filter(data => data === item._id).length === 0 ?'schoolName':'schoolName deleted'}>{item.schoolName}</p> */}
+                                            <p className={`schoolName ${oc ? 'orderChanged' : ''} ${nc ? 'nameChanged' : ''} ${del ? 'deleted' : ''}`}>{item.schoolName}</p>
                                         </li>
                                     )
                                 })
@@ -231,21 +251,31 @@ function EditSchool({ schoolData }) {
                     <button className='btn cancel' onClick={onCancel}>취소</button>
                 </div>
                 <div className='btnsArea side'>
-                    <button className='goUp' onClick={onMoveUp} disabled={selIdx === -1 || selIdx === 0}>
-                        <img src={upIcon} alt='위' />
-                    </button>
-                    <button className='goDown' onClick={onMoveDown} disabled={selIdx === -1 || selIdx === dataArr.length - 1}>
-                        <img src={downIcon} alt='아래' />
-                    </button>
-                    <button className='editName' disabled={selIdx === -1} onClick={onOpenModal}>
-                        <img src={editNameIcon} alt='수정' />
-                    </button>
-                    <button className='toGall' disabled={selIdx === -1} onClick={onNaviToEditGal}>
-                        <img src={toGallIcon} alt='사진' />
-                    </button>
-                    <button className='delSchool' disabled={selIdx === -1} onClick={e => onDeleteData(e, dataArr[selIdx]._id)}>
-                        <img src={delIcon} alt='삭제' />
-                    </button>
+                    <a data-tooltip-id="tooltip" data-tooltip-content="위로 이동">
+                        <button className='goUp' onClick={onMoveUp} disabled={selIdx === -1 || selIdx === 0}>
+                            <img src={upIcon} alt='위' />
+                        </button>
+                    </a>
+                    <a data-tooltip-id="tooltip" data-tooltip-content="아래로 이동">
+                        <button className='goDown' onClick={onMoveDown} disabled={selIdx === -1 || selIdx === dataArr.length - 1}>
+                            <img src={downIcon} alt='아래' />
+                        </button>
+                    </a>
+                    <a data-tooltip-id='tooltip' data-tooltip-content={"학교 이름 수정"}>
+                        <button className='editName' disabled={selIdx === -1} onClick={onOpenModal}>
+                            <img src={editNameIcon} alt='수정' />
+                        </button>
+                    </a>
+                    <a data-tooltip-id='tooltip' data-tooltip-content={"학교 사진 수정"}>
+                        <button className='toGall' disabled={selIdx === -1} onClick={onNaviToEditGal}>
+                            <img src={toGallIcon} alt='사진' />
+                        </button>
+                    </a>
+                    <a data-tooltip-id='tooltip' data-tooltip-content={"삭제"}>
+                        <button className='delSchool' disabled={selIdx === -1} onClick={e => onDeleteData(e, dataArr[selIdx]._id)}>
+                            <img src={delIcon} alt='삭제' />
+                        </button>
+                    </a>
                 </div>
             </form>
             <EditNamePopup
