@@ -9,9 +9,11 @@ import store from './reducer/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { CookiesProvider } from 'react-cookie';
+import axios from 'axios';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const persistor = persistStore(store);
+axios.defaults.withCredentials = true;
 root.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
