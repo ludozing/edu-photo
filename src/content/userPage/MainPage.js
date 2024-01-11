@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import eduLogo from '../../images/eduLogo.png';
 import './MainPage.scss';
 import { useNavigate } from 'react-router';
@@ -20,9 +20,21 @@ function MainPage(props) {
         return response.data;
     }
 
+    const [isError, setIsError] = useState(false);
     const state = useAsync(getThumbnailList);
     const { loading, error, data: result } = state;
-    if (loading) return <div className='mainPage bg'><div className='content'><div className='innerBg'><div className='innerLine'><LoadingPage/></div></div></div></div>
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsError(state.error);
+        }, 500);
+        if (state.error && isError) {
+            console.log('에러 확인');
+        }else {
+            setIsError(false);
+        }
+    }, [state.error])
+    if (loading) return <div className='mainPage bg'><div className='content'><div className='innerBg'><div className='innerLine'><LoadingPage /></div></div></div></div>
     if (error) {
         console.log(error)
         return <div className='content appCon'>페이지를 나타낼 수 없습니다.</div>
