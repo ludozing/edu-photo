@@ -10,6 +10,12 @@
 
 # production
 # /build
+/public
+/src
+.gitignore
+package-lock.json
+package.json
+README.md
 
 # misc
 .DS_Store

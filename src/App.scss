@@ -75,3 +75,20 @@
     }
   }
 }
+
+* {
+  &::-webkit-scrollbar {
+      width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+      // height: 10%;
+      background: #cccccc;
+      // border: 1px solid #777;
+      border-radius: 3px;
+      background-clip: padding-box;
+      border: 1px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+      background: transparent;
+  }
+}
