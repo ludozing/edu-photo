@@ -21,23 +21,32 @@ function MainPage(props) {
     }
 
     const [isError, setIsError] = useState(false);
+    const [attemptCount, setAttemptCount] = useState(0);
     const state = useAsync(getThumbnailList);
     const { loading, error, data: result } = state;
 
     useEffect(() => {
-        setTimeout(() => {
-            setIsError(state.error);
-        }, 500);
-        if (state.error && isError) {
-            console.log('에러 확인');
-        }else {
-            setIsError(false);
+        if(state.error!==null && attemptCount<2) {
+            console.log("ac:"+attemptCount)
+            setTimeout(() => {
+                if(state.error!==null) setAttemptCount(count => count + 1);
+            }, 100);
+        } else if (state.error!==null && attemptCount<4) {
+            console.log("ac:"+attemptCount)
+            setTimeout(() => {
+                if(state.error!==null) setAttemptCount(count => count +1);
+            }, 500);
+        } else {
+            if(state.error!==null) setIsError(true);
         }
-    }, [state.error])
+    }, [state.error, attemptCount])
     if (loading) return <div className='mainPage bg'><div className='content'><div className='innerBg'><div className='innerLine'><LoadingPage /></div></div></div></div>
-    if (error) {
+    if (isError) {
         console.log(error)
-        return <div className='content appCon'>페이지를 나타낼 수 없습니다.</div>
+        return <div className='content appCon' style={{width: "100vw", height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <p>페이지를 나타낼 수 없습니다.</p>
+            <p>잠시 후 다시 시도해 주세요.</p>
+        </div>
     }
     if (!result) return null;
     return (
