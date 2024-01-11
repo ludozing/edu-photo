@@ -10,6 +10,7 @@ import useAsync from '../../hooks/useAsync';
 import { API_URL } from '../../config/constants';
 import LoginPage from './LoginPage';
 import { useSelector } from 'react-redux';
+import LoadingPage from '../userPage/component/LoadingPage';
 
 function AdminPage(props) {
     async function getThumbnailList() {
@@ -19,7 +20,7 @@ function AdminPage(props) {
     const loginState = useSelector(state => state.session.login);
     const state = useAsync(getThumbnailList);
     const { loading, error, data: result } = state;
-    if (loading) return <div className='content appCon'>로딩중...</div>
+    if (loading) return <div className='adminPage bg'><div className='content'><div className='innerBg'><div className='innerLine'><LoadingPage/></div></div></div></div>
     if (error) {
         console.log(error)
         return <div className='content appCon'>페이지를 나타낼 수 없습니다.</div>

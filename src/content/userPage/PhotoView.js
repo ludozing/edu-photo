@@ -8,6 +8,7 @@ import toMainIcon from '../../images/toMainIcon.png';
 import axios from 'axios';
 import { API_URL, STORAGE_URL } from '../../config/constants';
 import useAsync from '../../hooks/useAsync';
+import LoadingPage from './component/LoadingPage';
 
 function PhotoView(props) {
     const param = useParams();
@@ -37,7 +38,7 @@ function PhotoView(props) {
 
     const state = useAsync(getImageList);
     const { loading, error, data: result } = state;
-    if (loading) return <div className='content appCon'>로딩중...</div>
+    if (loading) return <div className='photoViewPage bg'><div className='content'><div className='innerBg'><div className='innerLine'><LoadingPage/></div></div></div></div>
     if (error) {
         console.log(error)
         return <div className='content appCon'>페이지를 나타낼 수 없습니다.</div>

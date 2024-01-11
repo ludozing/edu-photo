@@ -8,6 +8,7 @@ import useAsync from '../../hooks/useAsync';
 import { Link } from 'react-router-dom';
 import noImgIcon from '../../images/schoolIcon.png';
 import adminBtn from '../../images/adminBtn.png';
+import LoadingPage from './component/LoadingPage';
 
 function MainPage(props) {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ function MainPage(props) {
 
     const state = useAsync(getThumbnailList);
     const { loading, error, data: result } = state;
-    if (loading) return <div className='content appCon'>로딩중...</div>
+    if (loading) return <div className='mainPage bg'><div className='content'><div className='innerBg'><div className='innerLine'><LoadingPage/></div></div></div></div>
     if (error) {
         console.log(error)
         return <div className='content appCon'>페이지를 나타낼 수 없습니다.</div>

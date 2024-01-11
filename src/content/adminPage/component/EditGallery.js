@@ -5,6 +5,7 @@ import EditGalleryForm from './EditGalleryForm';
 import { API_URL } from '../../../config/constants';
 import useAsync from '../../../hooks/useAsync';
 import './EditGallery.scss';
+import LoadingPage from '../../userPage/component/LoadingPage';
 
 function EditGallery(props) {
     const param = useParams();
@@ -16,7 +17,7 @@ function EditGallery(props) {
 
     const state = useAsync(getImageList);
     const { loading, error, data: result } = state;
-    if (loading) return <div className='content appCon'>로딩중...</div>
+    if (loading) return <LoadingPage/>
     if (error) {
         console.log(error)
         return <div className='content appCon'>페이지를 나타낼 수 없습니다.</div>
