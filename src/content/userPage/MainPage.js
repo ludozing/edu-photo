@@ -35,7 +35,7 @@ function MainPage(props) {
             console.log("ac:"+attemptCount)
             setTimeout(() => {
                 if(state.error!==null) setAttemptCount(count => count +1);
-            }, 500);
+            }, 3000);
         } else {
             if(state.error!==null) setIsError(true);
         }
